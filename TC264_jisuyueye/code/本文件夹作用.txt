@@ -1,0 +1,22 @@
+
+imu660ra_get_gyro()
+imu660ra_get_acc()
+
+这两个函数get到到的都是原始的没有物理意义的值---即imu660ra_gyro_x, imu660ra_gyro_y, imu660ra_gyro_z
+                                    imu660ra_acc_x, imu660ra_acc_y, imu660ra_acc_z
+                                    均为没有物理意义的值
+                                    
+float data = imu660ra_acc_transition(imu660ra_acc_x);           // 单位为 g(m/s^2) 
+float data = imu660ra_gyro_transition(imu660ra_gyro_x);         // 单位为 °/s 
+
+float imu660ra_transition_factor[2] = {4096, 16.4};                             // 转换实际值的比例
+#define imu660ra_acc_transition(acc_value)      ((float)(acc_value) / imu660ra_transition_factor[0])
+#define imu660ra_gyro_transition(gyro_value)    ((float)(gyro_value) / imu660ra_transition_factor[1])  
+
+也就是说可以直接调用这个函数来将非物理值转换成具有物理意义的值-即不需要手动除以16.4或者4096了---代码可以简化
+将角度转化为弧度的原因是因为大多数数学和物理公式中的三角函数（如正弦、余弦、切线等）都使用弧度作为单位，而不是角度。这样做是为了确保计算结果的正确性。
+
+加速度计和陀螺仪的融合是通过加速度计提供稳定的静态姿态估计，和陀螺仪提供的动态运动信息相结合来得到更加准确的姿态信息。
+通过这种方式，可以消除陀螺仪的积分误差并提高加速度计的动态响应能力。四元数作为姿态表示方式，能够更加高效和精确地融合这两者的数据，从而实现高精度的姿态估计。 
+加速度计数据用于修正陀螺仪数据，减少漂移。
+                               
