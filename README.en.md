@@ -1,36 +1,22 @@
-# jisuyueye
+# TC264 Off-Road Racing Car
 
-#### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+This repository archives the embedded project used by a student team in an off-road racing competition. It contains camera-based track processing, GPS/IMU handling, motion control, and peripheral drivers. It is a competition snapshot, not ready-to-run firmware for arbitrary hardware.
 
-#### Software Architecture
-Software architecture description
+## My contribution
 
-#### Installation
+As a core team member, I worked on **vision processing and voice interaction**. The vision work visible in this repository is mainly in [`images.c`](TC264_jisuyueye/code/images.c) and [`images.h`](TC264_jisuyueye/code/images.h): thresholding and binarization, track-boundary and centerline extraction, and deviation calculation. The voice-related source and demo materials have not yet been organized as a standalone module in this repository.
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+GPS/IMU handling, PID control, and the overall vehicle architecture are team-project components; this repository should not be presented as my solo work.
 
-#### Instructions
+## Layout and reproduction
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+- `TC264_jisuyueye/code/`: application modules, including image processing and control logic.
+- `TC264_jisuyueye/user/`: entry points and interrupt handlers.
+- `TC264_jisuyueye/libraries/`: chip and device libraries, including third-party code.
+- `TC264_jisuyueye/.project` and `.cproject`: AURIX/Eclipse project configuration targeting TC26xB.
 
-#### Contribution
+Reproduction requires compatible TC264 hardware, camera/peripherals, and the matching AURIX/TASKING toolchain. Pins and parameters must be checked against the actual vehicle. No independent build, hardware benchmark, or standardized image dataset is provided here.
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+## Rights and scope
 
-
-#### Gitee Feature
-
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+This is a team project with third-party dependencies. The repository currently has no overall open-source license; public visibility does not grant permission to reuse all code. Check team authorization and upstream component licenses before reuse.

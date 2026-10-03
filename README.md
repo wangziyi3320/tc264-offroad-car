@@ -1,39 +1,31 @@
-# jisuyueye
+# TC264 极速越野智能车
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+这是团队参加极速越野比赛时使用的 TC264 嵌入式工程代码存档。工程包含摄像头视觉处理、GPS/IMU 信息处理、运动控制和外设驱动；它是竞赛阶段的项目记录，不是无需适配即可运行的通用固件。
 
-#### 软件架构
-软件架构说明
+## 我的职责
 
+作为团队核心成员，我负责**视觉处理与语音交互相关功能**的开发和联调。当前仓库中可直接查看的个人工作主要是 [`images.c`](TC264_jisuyueye/code/images.c) 和 [`images.h`](TC264_jisuyueye/code/images.h)：对摄像头图像进行阈值处理与二值化，提取赛道左右边界、中线及偏差信息。语音部分的源码和演示资料尚未在此仓库中独立整理。
 
-#### 安装教程
+GPS/IMU、PID、整车架构等属于团队工程内容，不应把整个仓库视为我独立完成的项目。
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## 工程结构
 
-#### 使用说明
+| 路径 | 内容 |
+| --- | --- |
+| [`TC264_jisuyueye/code/`](TC264_jisuyueye/code/) | 图像处理、GPS/IMU、控制算法与外设逻辑 |
+| [`TC264_jisuyueye/user/`](TC264_jisuyueye/user/) | 主程序与中断处理 |
+| [`TC264_jisuyueye/libraries/`](TC264_jisuyueye/libraries/) | 芯片和设备支持库，含第三方代码 |
+| `TC264_jisuyueye/.project`、`.cproject` | AURIX/Eclipse 工程配置，目标处理器配置为 TC26xB |
+| `TC264_jisuyueye/Debug/` | 比赛阶段保留的历史构建产物 |
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+视觉处理代码包含基于 Otsu 思路的阈值计算、二值化、边线和中线提取等逻辑；[`GPS.c`](TC264_jisuyueye/code/GPS.c) 中可看到视觉结果与车辆控制流程的集成。仓库尚未提供标准化的离线图像测试集、实车效果指标或演示视频，因此不声明识别精度和性能提升数值。
 
-#### 参与贡献
+## 构建与复现
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+本工程依赖 TC264 目标板、匹配的摄像头和外设，以及相应的 AURIX/TASKING 编译环境。可将 `TC264_jisuyueye` 作为现有工程导入开发环境，再按实际硬件核对引脚、驱动与参数。本仓库目前未提供脱离原比赛硬件即可复现的构建和运行验证。
 
+## 代码与许可说明
 
-#### 特技
+这是团队竞赛工程，`libraries/` 中包含第三方芯片/设备支持代码。仓库目前未声明整体开源许可证；公开可见不代表所有代码均可自由复用。复用前请分别核对团队授权及第三方组件许可。
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+本项目与另一个 [STM32 红外循迹智能车](https://gitee.com/kjdz0905/stm32-line-following-car) 是两个不同的项目。
